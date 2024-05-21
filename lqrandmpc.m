@@ -1,0 +1,15 @@
+A = linsys1_C.A;
+B = linsys1_C.B;
+C = linsys1_C.C;
+D = 0;
+Ts = 0.01;
+x0 = [0;0;0;0];
+Qy = 0.1*eye(4);
+R = 0.1;
+K_lqr = lqr(linsys1_C,Qy,R);
+Np = 3;
+Nc = 1;
+n = 4;
+lamda =0.1;
+[Phi_Phi,Phi_F,Phi_R,Phi,A_e, B_e,C_e] = mpcgains(A, B, C, Np, Nc, n,Ts);
+delta_u = (Phi_Phi)\(Phi_R - Phi_F * [0 0 0 0 0]');
